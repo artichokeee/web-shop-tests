@@ -11,6 +11,12 @@ jobs:
       - checkout
       - cypress/install
       - run:
+          name: Remove duplicate package sources
+          command: |
+            rm -f /etc/apt/sources.list.d/microsoft-edge-stable.list
+            rm -f /etc/apt/sources.list.d/microsoft-edge.list
+            apt-get update
+      - run:
           name: Install Java
           command: |
             apt-get update && apt-get install -y \ openjdk-11-jre-headless \ && rm -rf /var/lib/apt/lists/*

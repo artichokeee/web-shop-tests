@@ -35,7 +35,10 @@ jobs:
           command: npm run cypress:run
       - run:
           name: Generate Allure report
-          command: npm run report:allure
+          command: allure generate --clean
+          when: always
+      - store_artifacts:
+          path: /home/circleci/project/allure-report
 
 workflows:
   build_and_test:

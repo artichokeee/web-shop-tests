@@ -41,10 +41,9 @@ jobs:
           command: |
             npm install -g allure-commandline
             allure generate allure-results --clean -o allure-report
-            find / -type d -name allure-report
-          when: always
+            when: always
       - store_artifacts:
-          path: /home/circleci/project/allure-report
+          path: /root/project/allure-report
 
 workflows:
   build_and_test:

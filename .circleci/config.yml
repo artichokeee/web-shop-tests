@@ -13,11 +13,7 @@ jobs:
       - run:
           name: Install Java
           command: |
-            apt-get update
-            apt-get install -y openjdk-11-jre
-            echo 'export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"' >> $BASH_ENV
-            echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV
-            source $BASH_ENV
+            apt-get update && apt-get install -y \ openjdk-11-jre-headless \ && rm -rf /var/lib/apt/lists/*
       - run:
           name: Install Cypress explicitly
           command: npm install cypress

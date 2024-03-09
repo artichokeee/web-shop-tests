@@ -43,7 +43,7 @@ jobs:
             allure generate allure-results --clean -o allure-report
           when: always
       - store_artifacts:
-          path: /home/circleci/project/allure-report
+          path: /home/circleci/project/allure-results
 
 workflows:
   build_and_test:

@@ -13,8 +13,8 @@ jobs:
       - run:
           name: Install Java
           command: |
-            sudo apt-get update
-            sudo apt-get install -y default-jdk
+            apt-get update
+            apt-get install -y default-jdk
             echo 'export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"' >> $BASH_ENV
             source $BASH_ENV
       - run:

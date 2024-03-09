@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   install_dependencies:
     docker:
-      - image: cimg/node:16.14.2 # Вы можете выбрать нужную вам версию Node
+      - image: cypress/browsers:node16.14.2-chrome89
     steps:
       - checkout
       - run:
@@ -12,16 +12,16 @@ jobs:
 
   run_tests:
     docker:
-      - image: cimg/node:14.17.0
+      - image: cypress/browsers:node16.14.2-chrome89
     steps:
       - checkout
       - run:
           name: Run tests
-          command: npm run run
+          command: npx cypress run
 
   generate_report:
     docker:
-      - image: cimg/node:14.17.0
+      - image: cypress/browsers:node16.14.2-chrome89
     steps:
       - checkout
       - run:

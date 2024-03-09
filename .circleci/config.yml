@@ -11,6 +11,13 @@ jobs:
       - checkout
       - cypress/install
       - run:
+          name: Install Java
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y default-jdk
+            echo 'export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
           name: Install Cypress explicitly
           command: npm install cypress
       - run:
@@ -19,14 +26,6 @@ jobs:
       - run:
           name: Run Cypress tests with custom command
           command: npm run cypress:run
-      - run:
-          name: Update packages and install Java
-          command: |
-            apt-get update
-            apt-get install -y openjdk-11-jdk
-            echo 'export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> $BASH_ENV
-            echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV
-            source $BASH_ENV
       - run:
           name: Generate Allure report
           command: npm run report:allure

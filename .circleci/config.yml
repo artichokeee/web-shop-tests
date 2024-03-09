@@ -28,15 +28,20 @@ jobs:
           name: Install Cypress explicitly
           command: npm install cypress
       - run:
+          name: Install mocha-allure-reporter
+          command: npm install mocha-allure-reporter
+      - run:
           name: Verify Cypress installation
           command: npx cypress verify
       - run:
           name: Run Cypress tests with custom command
           command: npm run cypress:run
       - run:
-          name: Generate Allure report
-          command: allure generate --clean
-          when: always
+          name: generate allure report
+          command: |
+            npm install -g allure-commandline
+            allure generate --clean
+    when: always
       - store_artifacts:
           path: /home/circleci/project/allure-report
 

@@ -1,47 +1,29 @@
-version: 2.1
+version: 3.3.1
+
+orbs:
+  cypress: cypress-io/cypress@3.3.1 # Используйте актуальную версию Cypress Orb
 
 jobs:
-  install_dependencies:
+  build:
     docker:
       - image: cypress/browsers:node16.14.2-slim-chrome103-ff102
-    steps:
+       steps:
       - checkout
-      - run:
-          name: Install dependencies using npm ci
-          command: npm ci
+      - cypress/install # Используем команду установки из Cypress Orb
       - run:
           name: Install Cypress explicitly
           command: npm install cypress
       - run:
-          name: Verify Cypress
+          name: Verify Cypress installation
           command: npx cypress verify
-
-  run_tests:
-    docker:
-      - image: cypress/browsers:node16.14.2-slim-chrome103-ff102
-    steps:
-      - checkout
       - run:
-          name: Run tests
+          name: Run Cypress tests with custom command
           command: npm run cypress:run
-
-  generate_report:
-    docker:
-      - image: cypress/browsers:node16.14.2-slim-chrome103-ff102
-    steps:
-      - checkout
       - run:
           name: Generate Allure report
           command: npm run report:allure
 
 workflows:
-  version: 2
   build_and_test:
     jobs:
-      - install_dependencies
-      - run_tests:
-          requires:
-            - install_dependencies
-      - generate_report:
-          requires:
-            - run_tests
+      - build

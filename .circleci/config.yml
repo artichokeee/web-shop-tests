@@ -9,7 +9,7 @@ jobs:
       - image: cypress/browsers:node16.14.2-slim-chrome103-ff102
     steps:
       - checkout
-      - cypress/install # Используем команду установки из Cypress Orb
+      - cypress/install
       - run:
           name: Install Cypress explicitly
           command: npm install cypress
@@ -20,11 +20,12 @@ jobs:
           name: Run Cypress tests with custom command
           command: npm run cypress:run
       - run:
-          name: Install Java
+          name: Update packages and install Java
           command: |
-            sudo apt update
-            sudo apt install -y openjdk-11-jdk
+            apt-get update
+            apt-get install -y openjdk-11-jdk
             echo 'export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"' >> $BASH_ENV
+            echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> $BASH_ENV
             source $BASH_ENV
       - run:
           name: Generate Allure report

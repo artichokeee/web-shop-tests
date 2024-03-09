@@ -19,7 +19,9 @@ jobs:
       - run:
           name: Install Java
           command: |
-            apt-get update && apt-get install -y openjdk-11-jdk-headless ca-certificates-java
+            apt-get update && apt-get purge -y openjdk-11-jdk-headless openjdk-11-jre-headless ca-certificates-java && \
+            apt-get install -y openjdk-11-jdk-headless ca-certificates-java && \
+            mkdir -p /usr/share/man/man1
       - run:
           name: Install Cypress explicitly
           command: npm install cypress

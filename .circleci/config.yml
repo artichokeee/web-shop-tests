@@ -41,7 +41,6 @@ jobs:
           command: |
             npm install -g allure-commandline
             allure generate --clean
-            when: always
       - store_artifacts:
           path: /root/project/allure-report
 

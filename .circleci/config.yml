@@ -11,13 +11,6 @@ jobs:
       - checkout
       - cypress/install
       - run:
-          name: Install Java
-          command: |
-            apt-get update
-            apt-get install -y default-jdk
-            echo 'export JAVA_HOME="$(dirname $(dirname $(readlink -f $(which javac))))"' >> $BASH_ENV
-            source $BASH_ENV
-      - run:
           name: Install Cypress explicitly
           command: npm install cypress
       - run:

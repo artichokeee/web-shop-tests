@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   install_dependencies:
     docker:
-      - image: cypress/browsers:node16.14.2-chrome89
+      - image: cypress/browsers:node16.14.2-slim-chrome103-ff102
     steps:
       - checkout
       - run:
@@ -12,7 +12,7 @@ jobs:
 
   run_tests:
     docker:
-      - image: cypress/browsers:node16.14.2-chrome89
+      - image: cypress/browsers:node16.14.2-slim-chrome103-ff102
     steps:
       - checkout
       - run:
@@ -21,7 +21,7 @@ jobs:
 
   generate_report:
     docker:
-      - image: cypress/browsers:node16.14.2-chrome89
+      - image: cypress/browsers:node16.14.2-slim-chrome103-ff102
     steps:
       - checkout
       - run:

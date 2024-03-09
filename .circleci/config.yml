@@ -6,25 +6,15 @@ jobs:
       - image: cypress/browsers:node16.14.2-slim-chrome103-ff102
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - npm-deps-{{ checksum "package-lock.json" }}
-            - cypress-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: Install dependencies
-          command: npm install
+          name: Install dependencies using npm ci
+          command: npm ci
       - run:
           name: Install Cypress explicitly
           command: npm install cypress
-      - save_cache:
-          paths:
-            - ./node_modules
-            - ~/.cache/Cypress
-          key: npm-deps-{{ checksum "package-lock.json" }}
-      - save_cache:
-          paths:
-            - ~/.cache/Cypress
-          key: cypress-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: Verify Cypress
+          command: npx cypress verify
 
   run_tests:
     docker:
